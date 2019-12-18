@@ -44,6 +44,51 @@ const createWindow = () => {
 
   mainWindow.webContents.openDevTools();
 
+  /* ********СЛУШАТЕЛЬ СОБЫТИЙ  START********* */
+
+  let newWindow;
+  ipcMain.on('openOrg', (event, id) => {
+    if (!newWindow) {
+      newWindow = createNewWin('organization/index.html', mainWindow, 800, 800);
+      storage.setItem('idOrg', id);
+    }
+
+    //createNewWin.webContents.send('idOrg', id);
+    //ipcMain.on('idOrg', id);
+    //console.log(id);
+  });
+  ipcMain.on('addedOrganization', () => {
+    if (!newWindow) {
+      newWindow = createNewWin('addNewOrg/index.html', mainWindow, 800, 800);
+    }
+  });
+
+  /* ********СЛУШАТЕЛЬ СОБЫТИЙ END********* */
+
+  /* Меню */
+
+  ipcMain.on('main', () => {
+    mainWindow.loadFile('src/index.html');
+  });
+  ipcMain.on('gain', () => {
+    mainWindow.loadFile('src/modules/addNewOrg/addNewOrg.html');
+  });
+  ipcMain.on('costs', () => {
+    mainWindow.loadFile('src/modules/costs/index.html');
+  });
+  ipcMain.on('settings', () => {
+    mainWindow.loadFile('src/modules/settings/index.html');
+  });
+  ipcMain.on('plans', () => {
+    mainWindow.loadFile('src/modules/settings/index.html');
+  });
+
+  /* Меню END */
+
+  // отображение окна после полной загрузки
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
+  });
 
   mainWindow.on('closed', () => {
     mainWindow = null;
@@ -51,7 +96,20 @@ const createWindow = () => {
 };
 
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+  createWindow();
+
+ /* const menu = Menu.buildFromTemplate(templateMenu);
+  Menu.setApplicationMenu(menu);
+
+  const ctxMenu = new Menu();
+  ctxMenu.append(new MenuItem(subMenu));
+
+  mainWindow.webContents.on('context-menu', (e, params) => {
+    // console.log(params);
+    ctxMenu.popup(mainWindow, params.x, params.y);
+  });
+});
 
 app.on('window-all-closed', () => {
 
@@ -64,5 +122,5 @@ app.on('activate', () => {
 
   if (mainWindow === null) {
     createWindow();
-  }
+  }*/
 });
