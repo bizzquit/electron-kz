@@ -10,7 +10,7 @@ const monthA = 'января,февраля,марта,апреля,мая,ию�
 const monthB = 'январь,февраль,март,апрель,май,июнь,июль,август,сентябрь,октябрь,ноябрь,декабрь'.split(',');
 
 const tekDate = `Сегодня ${now.getDate()} ${monthA[now.getMonth()]} ${now.getFullYear()} года`;
-tekDateValue.textContent = tekDate;
+//tekDateValue.textContent = tekDate;
 
 const listOrg = Data.getAllData('organizations');
 
@@ -36,7 +36,7 @@ let app = new Vue({
 
 
 const listItem = document.querySelectorAll('.list-items .list-item');
-const btnAddOrg = document.querySelector('.add-org');
+const btnAddLs = document.querySelector('.add-ls');
 
 listItem.forEach((item) => {
   item.addEventListener('click', (e) => {
@@ -47,9 +47,10 @@ listItem.forEach((item) => {
   });
 });
 
-btnAddOrg.addEventListener('click', (e) => {
+btnAddLs.addEventListener('click', (e) => {
   e.preventDefault();
-  ipcRenderer.send('addedOrganization');
+  console.log('click')
+  //ipcRenderer.send('addedOrganization');
 });
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -47,6 +47,7 @@ const createWindow = () => {
   /* ********СЛУШАТЕЛЬ СОБЫТИЙ  START********* */
 
   let newWindow;
+  // слушаем сигнал 'openOrg' и открываем новое окно
   ipcMain.on('openOrg', (event, id) => {
     if (!newWindow) {
       newWindow = createNewWin('organization/index.html', mainWindow, 800, 800);
