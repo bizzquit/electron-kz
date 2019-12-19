@@ -1,17 +1,17 @@
 const electron = require('electron');
-const { app, BrowserWindow, ipcMain } = require('electron');
+const {app, BrowserWindow, ipcMain} = require('electron');
 const Data = require('./rscalt/settings/data');
 const storage = require('electron-localstorage');
 const createNewWin = require('./rscalt/settings/modules').createNewWin;
 const templateMenu = require('./rscalt/settings/menu').templateMenu;
 const subMenu = require('./rscalt/settings/menu').subMenu;
 
+
 const Menu = electron.Menu;
 const MenuItem = electron.MenuItem;
 
 Data.createData('globalSettings');
 const settData = Data.getSettings('globalSettings');
-
 
 if (require('electron-squirrel-startup')) {
   app.quit();
@@ -21,7 +21,7 @@ if (require('electron-squirrel-startup')) {
 let mainWindow;
 
 const createWindow = () => {
- //Читаем файл настроек окна и прочего
+  //Читаем файл настроек окна и прочего
   if (settData) {
     mainWindow = new BrowserWindow({
       width: settData.width,
@@ -100,28 +100,28 @@ const createWindow = () => {
 app.on('ready', () => {
   createWindow();
 
- /* const menu = Menu.buildFromTemplate(templateMenu);
-  Menu.setApplicationMenu(menu);
+  /* const menu = Menu.buildFromTemplate(templateMenu);
+   Menu.setApplicationMenu(menu);
 
-  const ctxMenu = new Menu();
-  ctxMenu.append(new MenuItem(subMenu));
+   const ctxMenu = new Menu();
+   ctxMenu.append(new MenuItem(subMenu));
 
-  mainWindow.webContents.on('context-menu', (e, params) => {
-    // console.log(params);
-    ctxMenu.popup(mainWindow, params.x, params.y);
-  });
-});
+   mainWindow.webContents.on('context-menu', (e, params) => {
+     // console.log(params);
+     ctxMenu.popup(mainWindow, params.x, params.y);
+   });
+ });
 
-app.on('window-all-closed', () => {
+ app.on('window-all-closed', () => {
 
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
+   if (process.platform !== 'darwin') {
+     app.quit();
+   }
+ });
 
-app.on('activate', () => {
+ app.on('activate', () => {
 
-  if (mainWindow === null) {
-    createWindow();
-  }*/
+   if (mainWindow === null) {
+     createWindow();
+   }*/
 });
